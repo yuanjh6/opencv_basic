@@ -1,12 +1,17 @@
 # opencv小白07PracticalExercise学习笔记01
-资料:OpenCV-Practical-Exercise:https://github.com/luohenyueji/OpenCV-Practical-Exercise  
+资料:OpenCV-Practical-Exercise:https://github.com/luohenyueji/OpenCV-Practical-Exercise
+
 ## 学习目的
-1,OpenCV用法  
-2,各种机器学习场景涉及的opencv方法，问题解决思路等  
-3,各机器学习算法使用场景和特点  
+1,OpenCV用法
+
+2,各种机器学习场景涉及的opencv方法，问题解决思路等
+
+3,各机器学习算法使用场景和特点
+
 
 ## 1基于深度学习识别人脸性别和年龄
-核心代码  
+核心代码
+
 ```
 faceNet = cv.dnn.readNet(faceModel, faceProto)
 frameFace, bboxes = getFaceBox(faceNet, frame)
@@ -18,7 +23,8 @@ frameFace, bboxes = getFaceBox(faceNet, frame)
 ```
 
 ## 2人脸识别算法对比
-核心代码  
+核心代码
+
 ```
 faceCascade = cv2.CascadeClassifier('./model/haarcascade_frontalface_default.xml')
 outOpencvHaar, bboxes = detectFaceOpenCVHaar(faceCascade, frame)
@@ -26,7 +32,8 @@ outOpencvHaar, bboxes = detectFaceOpenCVHaar(faceCascade, frame)
 ```
 
 ## 3透明斗篷
-核心代码  
+核心代码
+
 ```
 img = np.flip(img,axis=1)#翻转
 
@@ -49,8 +56,10 @@ final_output = cv2.addWeighted(res1,1,res2,1,0)#合并，布以外=前景，布�
 ## 5基于深度学习的文本检测(略)
 ## 6基于特征点匹配的视频稳像(略)
 ## 7使用YOLOv3和OpenCV进行基于深度学习的目标检测Model
-YOLO目标检测器首先，它将图像划分为13×13的单元格。这169个单元的大小取决于输入的大小。对于我们在实验中使用的416×416输入尺寸，单元尺寸为32×32。然后每个单元格作为一个边界框进行一次检测。对于每个边界框，网络还预测边界框实际包围对象的置信度，以分类的概率。大多数这些边界框都被消除了，因为它们的置信度很低，或者因为它们与另一个具有非常高置信度得分的边界框包围相同的对象。该技术称为非极大值抑制。  
-YOLOv3作者使YOLOv3比以前的作品YOLOv2更快，更准确。YOLOv3可以更好地进行多个尺度检测。他们还通过增加网络来改进网络。  
+YOLO目标检测器首先，它将图像划分为13×13的单元格。这169个单元的大小取决于输入的大小。对于我们在实验中使用的416×416输入尺寸，单元尺寸为32×32。然后每个单元格作为一个边界框进行一次检测。对于每个边界框，网络还预测边界框实际包围对象的置信度，以分类的概率。大多数这些边界框都被消除了，因为它们的置信度很低，或者因为它们与另一个具有非常高置信度得分的边界框包围相同的对象。该技术称为非极大值抑制。
+
+YOLOv3作者使YOLOv3比以前的作品YOLOv2更快，更准确。YOLOv3可以更好地进行多个尺度检测。他们还通过增加网络来改进网络。
+
 ```
 modelConfiguration = "yolov3.cfg";
 modelWeights = "yolov3.weights";
@@ -59,8 +68,10 @@ net = cv.dnn.readNetFromDarknet(modelConfiguration, modelWeights)
 net.setPreferableBackend(cv.dnn.DNN_BACKEND_OPENCV)
 net.setPreferableTarget(cv.dnn.DNN_TARGET_CPU)
 ```
-第一个设置，假如设置DEFAULT，默认设置的话，必须设置一个环境变量，并且变量的路径要是磁盘上一个文件夹，文件夹要存在，否则会警告或者报错。假如设置成OPENCV，会在用户名一个临时文件夹生成一些OPENCL的文件。建议设置为OPENCV，不用去配置环境变量  
-第二个设置，假如设置为CPU的话，速度较慢，通用性较好。设置为OPENCL的话，只能运行在inter的GPU上。假如电脑上有NVIDIA的话，会一直卡住，目前还没找到设置OPENCV运行哪块GPU的方法，没有在NVIDIA上的电脑上运行过。所以，为了确保GPU加速，不要在有NVIDIA电脑上运行  
+第一个设置，假如设置DEFAULT，默认设置的话，必须设置一个环境变量，并且变量的路径要是磁盘上一个文件夹，文件夹要存在，否则会警告或者报错。假如设置成OPENCV，会在用户名一个临时文件夹生成一些OPENCL的文件。建议设置为OPENCV，不用去配置环境变量
+
+第二个设置，假如设置为CPU的话，速度较慢，通用性较好。设置为OPENCL的话，只能运行在inter的GPU上。假如电脑上有NVIDIA的话，会一直卡住，目前还没找到设置OPENCV运行哪块GPU的方法，没有在NVIDIA上的电脑上运行过。所以，为了确保GPU加速，不要在有NVIDIA电脑上运行
+
 
 ```
 # Create a 4D blob from a frame.
@@ -105,7 +116,8 @@ cv.putText(frame, label, (0, 15), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255))
 
 ## 8深度学习目标检测网络YOLOv3的训练(略)
 ## 9使用OpenCV寻找平面图形的质心	
-核心代码  
+核心代码
+
 ```
 gray_image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 ret,thresh = cv2.threshold(gray_image,127,255,0)
