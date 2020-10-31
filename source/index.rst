@@ -3,8 +3,9 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to opencv_basic's documentation!
+opencv基础篇学习整理
 ========================================
+opencv个人学习笔记，之前并未有视觉经验，且工作中使用场景有限且较为粗浅，只知道大概执行效果即可，并未做深入学习
 
 .. toctree::
    :maxdepth: 2
